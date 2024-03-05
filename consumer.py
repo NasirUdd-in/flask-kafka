@@ -16,10 +16,11 @@ class UserActivity(Base):
     username = Column(String)
     ip_address = Column(String)
     timestamp = Column(DateTime, default=datetime.now)
+    project = Column(String,default=None )
 
 def save_user_activity(data, session):
     try:
-        user_activity = UserActivity(event_type=data['event_type'], username=data['username'],ip_address=data.get('ip_address', ''), timestamp=data["timestamp"])
+        user_activity = UserActivity(event_type=data['event_type'], username=data['username'],ip_address=data.get('ip_address', ''), timestamp=data["timestamp"],project=data['project'])
         session.add(user_activity)
         session.commit()
     except Exception as e:
